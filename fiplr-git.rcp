@@ -1,0 +1,6 @@
+(:name fiplr-git
+       :description "Extension to fiplr to support .gitignore globs"
+       :type github
+       :pkgname "mattdenner/fiplr-git"
+       :depends (fiplr)
+       :features fiplr-git)
