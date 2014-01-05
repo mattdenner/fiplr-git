@@ -5,8 +5,11 @@ uses .gitignore files for the ignore glob patterns.
 
 ## Installation
 
-Best to use (el-get)[https://github.com/dimitri/el-get] and then use the
-(recipe file)[https://github.com/mattdenner/fiplr-git/blob/master/fiplr-git.rcp].
+Best to use [el-get](https://github.com/dimitri/el-get) and then use the
+[recipe file](https://github.com/mattdenner/fiplr-git/blob/master/fiplr-git.rcp).
+
+*NOTE:* this requires [a fix I've made](https://github.com/d11wtq/fiplr/pull/30) in
+the fiplr codebase to allow for ignore glob changes.
 
 ## Usage
 
