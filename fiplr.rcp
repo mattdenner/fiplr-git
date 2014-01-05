@@ -1,0 +1,6 @@
+(:name fiplr
+       :description "CTRL-P inspired file loader"
+       :type github
+       :pkgname "d11wtq/fiplr"
+       :depends (grizzl)
+       :features fiplr)
