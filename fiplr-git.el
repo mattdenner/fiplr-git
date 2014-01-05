@@ -20,7 +20,7 @@
 ;; Fiplr is a fuzzy finder for files and this is an extension to that using the
 ;; contents of the .gitignore file found in the root of the project.
 ;;
-;;   M-x fiplr-find-file-with-git-ignore
+;;   M-x fiplr-find-file-with-gitignore
 ;;
 ;; Performs exactly as `fiplr-find-file' except that if a .gitignore file is
 ;; found in the project root the contents, along with the normal
@@ -28,7 +28,7 @@
 
 ;;; --- Future Work
 
-;; * `fiplr-find-directory-with-git-ignore'
+;; * `fiplr-find-directory-with-gitignore'
 ;; * use global .gitignore too
 ;; * support negative globs from .gitignore
 
