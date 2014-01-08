@@ -78,7 +78,7 @@
         (insert-file-contents path)
         (let ((globs (split-string (buffer-string) "\n" t)))
           (mapcar fiplr-glob-remapper globs))
-    ()))
+    ())))
 
 ;;; --- Public Functions
 
