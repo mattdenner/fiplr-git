@@ -45,6 +45,13 @@
           for k in keys collect
           (cons k (funcall function (lookup k alist1) (lookup k alist2))))))
 
+(defun compose (funcs)
+  (if funcs
+      (lexical-let ((fs funcs))
+        (lambda (arg)
+          (funcall (car fs) (funcall (compose (cdr fs)) arg))))
+    (lambda (arg) arg)))
+
 (defun fiplr-suggested-ignore-globs (globs)
   (merge-alists
    (lambda (a b) (list (append (car a) (car b))))
@@ -52,13 +59,26 @@
    fiplr-ignored-globs
    (list (list 'files globs) (list 'directories globs))))
 
+; Checks:
+; (funcall fiplr-glob-remapper "*.f") ; => "*.f"
+; (funcall fiplr-glob-remapper "f") ; => "*/f/*"
+; (funcall fiplr-glob-remapper "f/**") ; => "*/f/*"
+; (funcall fiplr-glob-remapper "f/**/*") ; => "*/f/*/*"
+; (funcall fiplr-glob-remapper "f*") ; => "*/f*"
+(defvar fiplr-glob-remapper
+  (compose '(
+             (lambda (path) (replace-regexp-in-string "\\*\\*" "*" path))
+             (lambda (path) (if (string-match "^\\*" path) path (concat "*/" path)))
+             (lambda (path) (if (string-match "\\*" path) path (concat path "/*")))
+             )))
+
 (defun fiplr-ignored-globs-from-file (path)
   (if (file-exists-p path)
       (with-temp-buffer
         (insert-file-contents path)
-        (split-string (buffer-string) "\n" t))
+        (let ((globs (split-string (buffer-string) "\n" t)))
+          (mapcar fiplr-glob-remapper globs))
     ()))
-
 
 ;;; --- Public Functions
 
